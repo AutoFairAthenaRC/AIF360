@@ -2,7 +2,12 @@ from typing import List, Dict, Tuple, Optional
 
 import matplotlib.pyplot as plt
 
-from colorama import Fore, Style
+try:
+    from colorama import Fore, Style
+except ImportError as error:
+    from logging import warning
+    warning("{}: FACTS will be unavailable. To install, run:\n"
+            "pip install 'aif360[FACTS]'".format(error))
 
 from .predicate import Predicate
 

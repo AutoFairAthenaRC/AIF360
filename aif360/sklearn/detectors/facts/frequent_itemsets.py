@@ -5,8 +5,14 @@ import pandas as pd
 from pandas import DataFrame
 from typing import List, Tuple
 
-from mlxtend.preprocessing import TransactionEncoder
-from mlxtend.frequent_patterns import fpgrowth
+try:
+    from mlxtend.preprocessing import TransactionEncoder
+    from mlxtend.frequent_patterns import fpgrowth
+except ImportError as error:
+    from logging import warning
+    warning("{}: FACTS will be unavailable. To install, run:\n"
+            "pip install 'aif360[FACTS]'".format(error))
+
 ## removes nasty mlxtend-caused warning: they set a global warning filter on
 ## Deprecation Warnings which then hits even when e.g. importing matplotlib.
 if warnings.filters[0] == ("always", None, DeprecationWarning, None, 0):

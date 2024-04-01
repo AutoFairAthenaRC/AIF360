@@ -1,4 +1,10 @@
-from tqdm import tqdm
+try:
+    from tqdm import tqdm
+except ImportError as error:
+    from logging import warning
+    warning("{}: FACTS will be unavailable. To install, run:\n"
+            "pip install 'aif360[FACTS]'".format(error))
+
 from typing import List, Tuple, Dict
 import functools
 
